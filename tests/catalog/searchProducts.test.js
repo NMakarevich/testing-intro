@@ -2,13 +2,49 @@ const products = require('../../src/data/products');
 const { searchProducts } = require('../../src/catalog');
 
 describe('searchProducts', () => {
-  test.todo("'Наушники' возвращает товар с ID 1");
-  test.todo("'Чистый код' возвращает товар с ID 6");
-  test.todo("'Настольная лампа' возвращает товар с ID 4");
-  test.todo("'javascript' возвращает товар с ID 3");
-  test.todo("'ЧЕХОЛ' возвращает товар с ID 5");
-  test.todo("'наушники' возвращает товар с ID 1");
-  test.todo("пустая строка возвращает товары с ID [1, 2, 3, 4, 5, 6]");
-  test.todo("строка из пробелов возвращает товары с ID [1, 2, 3, 4, 5, 6]");
-  test.todo("'\\t\\n' возвращает товары с ID [1, 2, 3, 4, 5, 6]");
+  test("'Наушники' возвращает товар с ID 1", () => {
+    const result = searchProducts(products,'Наушники');
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual(products[0])
+  });
+  test("'Чистый код' возвращает товар с ID 6", () => {
+    const result = searchProducts(products, 'Чистый код');
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual(products[5])
+  });
+  test("'Настольная лампа' возвращает товар с ID 4", () => {
+    const result = searchProducts(products, 'Настольная лампа');
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual(products[3]);
+  });
+  test("'javascript' возвращает товар с ID 3", () => {
+    const result = searchProducts(products, 'javascript');
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual(products[2]);
+  });
+  test("'ЧЕХОЛ' возвращает товар с ID 5", () => {
+    const result = searchProducts(products, 'ЧЕХОЛ');
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual(products[4]);
+  });
+  test("'наушники' возвращает товар с ID 1", () => {
+    const result = searchProducts(products, 'наушники');
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual(products[0]);
+  });
+  test("пустая строка возвращает товары с ID [1, 2, 3, 4, 5, 6]", () => {
+    const result = searchProducts(products, '');
+    expect(result.length).toEqual(products.length);
+    expect(result).toEqual(products);
+  });
+  test("строка из пробелов возвращает товары с ID [1, 2, 3, 4, 5, 6]", () => {
+    const result = searchProducts(products, '    ');
+    expect(result.length).toEqual(products.length);
+    expect(result).toEqual(products);
+  });
+  test("'\\t\\n' возвращает товары с ID [1, 2, 3, 4, 5, 6]", () => {
+    const result = searchProducts(products, '\t\n');
+    expect(result.length).toEqual(products.length);
+    expect(result).toEqual(products);
+  });
 });
